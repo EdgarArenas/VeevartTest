@@ -1,0 +1,9 @@
+C:\Users\edgar\source\repos\Test15\Test15\bin\Debug\Test15.exe.config
+C:\Users\edgar\source\repos\Test15\Test15\bin\Debug\Test15.exe
+C:\Users\edgar\source\repos\Test15\Test15\bin\Debug\Test15.pdb
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.csproj.AssemblyReference.cache
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.Properties.Resources.resources
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.csproj.GenerateResource.cache
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.csproj.CoreCompileInputs.cache
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.exe
+C:\Users\edgar\source\repos\Test15\Test15\obj\Debug\Test15.pdb
