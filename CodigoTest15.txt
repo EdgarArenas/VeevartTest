@@ -1,0 +1,207 @@
+using System;
+
+class Test15
+{
+    static void Main()
+    {
+        string[] sopaDeLetras = { "A M L J P", "C O O W E", "L O O K A", "B N T X R" };
+        string[] palabrasABuscar = { "MOON", "LOOK", "LOOT", "CARS", "PEAR", "NOW" };
+
+        ImprimirMatriz(sopaDeLetras);
+        BuscarPalabrasEnSopa(sopaDeLetras, palabrasABuscar);
+    }
+
+    static void ImprimirMatriz(string[] sopaDeLetras)
+    {
+        Console.WriteLine("Sopa de Letras:");
+        foreach (var fila in sopaDeLetras)
+        {
+            Console.WriteLine(fila);
+        }
+        Console.WriteLine();
+    }
+
+    static void BuscarPalabrasEnSopa(string[] sopaDeLetras, string[] palabrasABuscar)
+    {
+        for (int i = 0; i < palabrasABuscar.Length; i++)
+        {
+            Console.WriteLine($"{i + 1}. Searching \"{palabrasABuscar[i]}\"");
+
+            if (BuscarPalabra(sopaDeLetras, palabrasABuscar[i]))
+            {
+                ImprimirUbicaciones(sopaDeLetras, palabrasABuscar[i]);
+            }
+            else
+            {
+                Console.WriteLine($"\"{palabrasABuscar[i]}\" Not found");
+            }
+        }
+    }
+
+    static bool BuscarPalabra(string[] sopaDeLetras, string palabra)
+    {
+        int filas = sopaDeLetras.Length;
+        int columnas = sopaDeLetras[0].Split(' ').Length;
+
+        for (int fila = 0; fila < filas; fila++)
+        {
+            for (int columna = 0; columna < columnas; columna++)
+            {
+                // Buscar horizontalmente
+                if (BuscarHorizontal(sopaDeLetras, palabra, fila, columna))
+                {
+                    return true;
+                }
+
+                // Buscar verticalmente
+                if (BuscarVertical(sopaDeLetras, palabra, fila, columna))
+                {
+                    return true;
+                }
+
+                // Buscar en diagonal (superior izquierda a inferior derecha)
+                if (BuscarDiagonalSuperiorIzquierdaInferiorDerecha(sopaDeLetras, palabra, fila, columna))
+                {
+                    return true;
+                }
+
+                // Buscar en diagonal (inferior izquierda a superior derecha)
+                if (BuscarDiagonalInferiorIzquierdaSuperiorDerecha(sopaDeLetras, palabra, fila, columna))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    static bool BuscarHorizontal(string[] sopaDeLetras, string palabra, int fila, int columna)
+    {
+        int longitud = palabra.Length;
+        if (columna + longitud > sopaDeLetras[0].Split(' ').Length)
+        {
+            return false; // La palabra no cabe horizontalmente desde la posición actual
+        }
+
+        for (int i = 0; i < longitud; i++)
+        {
+            if (sopaDeLetras[fila].Split(' ')[columna + i][0] != palabra[i])
+            {
+                return false; // No coincide la letra en la posición actual
+            }
+        }
+
+        return true;
+    }
+
+    static bool BuscarVertical(string[] sopaDeLetras, string palabra, int fila, int columna)
+    {
+        int longitud = palabra.Length;
+        if (fila + longitud > sopaDeLetras.Length)
+        {
+            return false; // La palabra no cabe verticalmente desde la posición actual
+        }
+
+        for (int i = 0; i < longitud; i++)
+        {
+            if (sopaDeLetras[fila + i].Split(' ')[columna][0] != palabra[i])
+            {
+                return false; // No coincide la letra en la posición actual
+            }
+        }
+
+        return true;
+    }
+
+    static bool BuscarDiagonalSuperiorIzquierdaInferiorDerecha(string[] sopaDeLetras, string palabra, int fila, int columna)
+    {
+        int longitud = palabra.Length;
+        if (fila + longitud > sopaDeLetras.Length || columna + longitud > sopaDeLetras[0].Split(' ').Length)
+        {
+            return false; // La palabra no cabe en la diagonal desde la posición actual
+        }
+
+        for (int i = 0; i < longitud; i++)
+        {
+            if (sopaDeLetras[fila + i].Split(' ')[columna + i][0] != palabra[i])
+            {
+                return false; // No coincide la letra en la posición actual
+            }
+        }
+
+        return true;
+    }
+
+    static bool BuscarDiagonalInferiorIzquierdaSuperiorDerecha(string[] sopaDeLetras, string palabra, int fila, int columna)
+    {
+        int longitud = palabra.Length;
+        if (fila - longitud + 1 < 0 || columna + longitud > sopaDeLetras[0].Split(' ').Length)
+        {
+            return false; // La palabra no cabe en la diagonal desde la posición actual
+        }
+
+        for (int i = 0; i < longitud; i++)
+        {
+            if (sopaDeLetras[fila - i].Split(' ')[columna + i][0] != palabra[i])
+            {
+                return false; // No coincide la letra en la posición actual
+            }
+        }
+
+        return true;
+    }
+
+    static void ImprimirUbicaciones(string[] sopaDeLetras, string palabra)
+    {
+        int filas = sopaDeLetras.Length;
+        int columnas = sopaDeLetras[0].Split(' ').Length;
+
+        for (int fila = 0; fila < filas; fila++)
+        {
+            for (int columna = 0; columna < columnas; columna++)
+            {
+                // Imprimir ubicaciones horizontales
+                if (BuscarHorizontal(sopaDeLetras, palabra, fila, columna))
+                {
+                    for (int i = 0; i < palabra.Length; i++)
+                    {
+                        Console.WriteLine($"{palabra[i]} - [{fila}, {columna + i}]");
+                    }
+                    return; // Detener la búsqueda después de la primera ocurrencia
+                }
+
+                // Imprimir ubicaciones verticales
+                if (BuscarVertical(sopaDeLetras, palabra, fila, columna))
+                {
+                    for (int i = 0; i < palabra.Length; i++)
+                    {
+                        Console.WriteLine($"{palabra[i]} - [{fila + i}, {columna}]");
+                    }
+                    return; // Detener la búsqueda después de la primera ocurrencia
+                }
+
+                // Imprimir ubicaciones en diagonal (superior izquierda a inferior derecha)
+                if (BuscarDiagonalSuperiorIzquierdaInferiorDerecha(sopaDeLetras, palabra, fila, columna))
+                {
+                    for (int i = 0; i < palabra.Length; i++)
+                    {
+                        Console.WriteLine($"{palabra[i]} - [{fila + i}, {columna + i}]");
+                    }
+                    return; // Detener la búsqueda después de la primera ocurrencia
+                }
+
+                // Imprimir ubicaciones en diagonal (inferior izquierda a superior derecha)
+                if (BuscarDiagonalInferiorIzquierdaSuperiorDerecha(sopaDeLetras, palabra, fila, columna))
+                {
+                    for (int i = 0; i < palabra.Length; i++)
+                    {
+                        Console.WriteLine($"{palabra[i]} - [{fila - i}, {columna + i}]");
+                    }
+                    return; // Detener la búsqueda después de la primera ocurrencia
+                }
+            }
+        }
+    }
+}
+
