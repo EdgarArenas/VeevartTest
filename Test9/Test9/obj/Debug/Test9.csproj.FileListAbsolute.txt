@@ -1,0 +1,9 @@
+C:\Users\edgar\source\repos\Test9\Test9\bin\Debug\Test9.exe.config
+C:\Users\edgar\source\repos\Test9\Test9\bin\Debug\Test9.exe
+C:\Users\edgar\source\repos\Test9\Test9\bin\Debug\Test9.pdb
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.csproj.AssemblyReference.cache
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.Properties.Resources.resources
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.csproj.GenerateResource.cache
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.csproj.CoreCompileInputs.cache
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.exe
+C:\Users\edgar\source\repos\Test9\Test9\obj\Debug\Test9.pdb
